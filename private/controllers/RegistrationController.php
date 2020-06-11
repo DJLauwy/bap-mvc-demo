@@ -46,11 +46,10 @@
 
 				if ($statement->rowCount() === 0){
 					//Als die er niet is dan doorgaan
-					$sql = "INSERT INTO `gebruikers` (`naam`, `email`, `wachtwoord`) VALUES (:naam, :email, :wachtwoord)";
+					$sql = "INSERT INTO `gebruikers` (`email`, `wachtwoord`) VALUES (:email, :wachtwoord)";
 					$statement = $connection->prepare($sql);
 					$safe_password = password_hash($wachtwoord, PASSWORD_DEFAULT);
 					$params = [
-						'naam' => $naam,
 						'email' => $email,
 						'wachtwoord' => $safe_password
 					];
