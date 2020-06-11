@@ -83,3 +83,61 @@ function current_route_is( $name ) {
 	return false;
 
 }
+
+// Voeg deze code toe onderaan in je private/includes/functions.php
+// ZONDER de eerste PHP tag want die staat al bovenaan je functions.php ;-)
+
+/**
+ * Maak de SwiftMailer aan en stet hem op de juiste manier in
+ *
+ * @return Swift_Mailer
+ */
+function getSwiftMailer() {
+	$mail_config = get_config( 'MAIL' );
+	$transport   = new \Swift_SmtpTransport( $mail_config['SMTP_HOST'], $mail_config['SMTP_PORT'] );
+	$transport->setUsername($mail_config['SMTP_USER'] );
+	$transport->setPassword($mail_config['SMTP_PASSWORD']);
+
+	$mailer = new \Swift_Mailer( $transport );
+
+	return $mailer;
+}
+
+/**
+ * Maak een Swift_Message met de opgegeven subject, afzender en ontvanger
+ *
+ * @param $to
+ * @param $subject
+ * @param $from_name
+ * @param $from_email
+ *
+ * @return Swift_Message
+ */
+function createEmailMessage( $to, $subject, $from_name, $from_email ) {
+
+	// Create a message
+	$message = new \Swift_Message( $subject );
+	$message->setFrom( [ $from_email => $from_email ] );
+	$message->setTo( $to );
+
+	// Send the message
+	return $message;
+}
+
+/**
+ *
+ * @param $message \Swift_Message De Swift Message waarin de afbeelding ge-embed moet worden
+ * @param $filename string Bestandsnaam van de afbeelding (wordt automatisch uit juiste folder gehaald)
+ *
+ * @return mixed
+ */
+function embedImage( $message, $filename ) {
+	$image_path = get_config( 'WEBROOT' ) . '/images/email/' . $filename;
+	if ( ! file_exists( $image_path ) ) {
+		throw new \RuntimeException( 'Afbeelding bestaat niet: ' . $image_path );
+	}
+
+	$cid = $message->embed( \Swift_Image::fromPath( $image_path ) );
+
+	return $cid;
+}
