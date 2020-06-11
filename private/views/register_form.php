@@ -1,3 +1,5 @@
+<?php $this->layout('webiste') ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -5,7 +7,7 @@
 	</head>
 	<body>
 		<h1>account aanmaken</h1>
-		<form action="<?php echo url('register.handle') ?>" method="post">
+		<form action="register.php" method="post">
 			<input type="text" placeholder="naam" name="naam" required>
 			<input type="email" placeholder="e-mail adres" name="email" required>
 			<input type="password" placeholder="wachtwoord" name="wachtwoord" required>
