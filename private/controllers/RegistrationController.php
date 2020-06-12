@@ -53,14 +53,27 @@
 						'email' => $email,
 						'wachtwoord' => $safe_password
 					];
-					$statement->execute($params);
-					echo "Klaar! Account opgeslagen.";
-					exit;
+					$statement->execute($params); 
+
+					$bedanktUrl = url('registration.thankyou');
+					redirect($bedanktUrl);
+					
+
 				} else {
 					//Anders foutmelding
 					$errors['email'] = 'Dit account bestaat al';
 				}
 			}
+
+			$template_engine = get_template_engine();
+			echo $template_engine->render('register_form', ['errors' => $errors]);
+
 		}
+
+		public function registrationThankYou(){	
+			$template_engine = get_template_engine();
+			echo $template_engine->render("register_thankyou");
+		}
+
 	}
 ?>

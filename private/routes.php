@@ -17,6 +17,10 @@ SimpleRouter::group( [ 'prefix' => site_url() ], function () {
 
 	SimpleRouter::get('/stuur-test-email', 'EmailController@sendTestEmail')->name('email.test');
 
+	SimpleRouter::get('/registreren/bedankt', 'RegistrationController@registrationThankYou')->name('register.thankyou');
+
+
+
 	// STOP: Tot hier al je eigen URL's zetten
 	SimpleRouter::get( '/not-found', function () {
 		http_response_code( 404 );

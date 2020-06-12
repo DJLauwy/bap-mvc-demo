@@ -1,4 +1,4 @@
-<?php $this->layout('webiste') ?>
+<?php $this->layout('index') ?>
 
 <!DOCTYPE html>
 <html>
@@ -7,10 +7,15 @@
 	</head>
 	<body>
 		<h1>account aanmaken</h1>
-		<form action="register.php" method="post">
-			<input type="text" placeholder="naam" name="naam" required>
+		<form action="<?php echo url('register.handle') ?>" method="post">
 			<input type="email" placeholder="e-mail adres" name="email" required>
+			<?php if (isset($errors['email'])): ?>
+				<span style="color:red;"><?php echo $errors['email'] ?></span>
+			<?php endif; ?>
 			<input type="password" placeholder="wachtwoord" name="wachtwoord" required>
+			<?php if (isset($errors['wachtwoord'])): ?>
+				<span style="color:red;"><?php echo $errors['wachtwoord'] ?></span>
+			<?php endif; ?>
 			<input type="submit" value="registreren">
 		</form>
 	</body>
