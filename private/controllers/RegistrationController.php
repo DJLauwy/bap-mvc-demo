@@ -46,6 +46,11 @@
 
 				if ($statement->rowCount() === 0){
 					//Als die er niet is dan doorgaan
+
+					//Verificatiecode
+					$code = md5(uniqid(rand(), true));
+					
+
 					$sql = "INSERT INTO `gebruikers` (`email`, `wachtwoord`) VALUES (:email, :wachtwoord)";
 					$statement = $connection->prepare($sql);
 					$safe_password = password_hash($wachtwoord, PASSWORD_DEFAULT);
