@@ -49,16 +49,17 @@
 
 					//Verificatiecode
 					$code = md5(uniqid(rand(), true));
-					
 
-					$sql = "INSERT INTO `gebruikers` (`email`, `wachtwoord`) VALUES (:email, :wachtwoord)";
+					$sql = "INSERT INTO `gebruikers` (`email`, `wachtwoord`, `code`) VALUES (:email, :wachtwoord, :code)";
 					$statement = $connection->prepare($sql);
 					$safe_password = password_hash($wachtwoord, PASSWORD_DEFAULT);
+
 					$params = [
 						'email' => $email,
-						'wachtwoord' => $safe_password
+						'wachtwoord' => $safe_password,
+						'code' => $code
 					];
-					$statement->execute($params); 
+					$statement->execute($params);  
 
 					$bedanktUrl = url('registration.thankyou');
 					redirect($bedanktUrl);
@@ -78,6 +79,10 @@
 		public function registrationThankYou(){	
 			$template_engine = get_template_engine();
 			echo $template_engine->render("register_thankyou");
+		}
+
+		public function confirmRegistration($code){
+			echo $code;
 		}
 
 	}

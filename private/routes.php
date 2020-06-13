@@ -19,6 +19,8 @@ SimpleRouter::group( [ 'prefix' => site_url() ], function () {
 
 	SimpleRouter::get('/registreren/bedankt', 'RegistrationController@registrationThankYou')->name('register.thankyou');
 
+	SimpleRouter::get('/registreren/bevestigen/{code}', 'RegistrationController@confirmRegistration')->name('register.confirm');
+
 
 
 	// STOP: Tot hier al je eigen URL's zetten
