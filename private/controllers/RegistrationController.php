@@ -82,7 +82,20 @@
 		}
 
 		public function confirmRegistration($code){
-			echo $code;
+			//code lezen
+			//gebruiker ophalen
+						$user = getUserByCode($code);
+			if ($user === false /*!$user*/ ){
+				echo "onbekende gebruiker of als bevestigd?";
+				exit;
+			}
+			//echo print_r($user);
+			/*------------------*/
+			//gebruiker activeren
+			confirmAccount($code);
+			//doorsturen bevestigings pagina
+			$template_engine = get_template_engine();
+			echo $template_engine->render("register_confirmed");
 		}
 
 	}

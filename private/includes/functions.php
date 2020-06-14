@@ -141,3 +141,14 @@ function embedImage( $message, $filename ) {
 
 	return $cid;
 }
+
+/* Confirm an account by confirmation code */
+function confirmAccount($code){
+	$connection = dbConnect();
+	$sql = "UPDATE `gebruikers` SET `code` = NULL WHERE `code` = :code";
+	$statement = $connection->prepare($sql);
+	$params = [
+		'code' => $code
+	];
+	$statement->execute($params);
+}
