@@ -1,11 +1,4 @@
-<?php $this->layout('index') ?>
-
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>verificatiemail bap</title>
-	</head>
-	<body>
+<?php $this->layout('website') ?>
 		<h1>account aanmaken</h1>
 		<form action="<?php echo url('register.handle') ?>" method="post">
 			<input type="email" placeholder="e-mail adres" name="email" required>

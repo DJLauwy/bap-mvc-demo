@@ -42,6 +42,10 @@ function site_url( $path = '' ) {
 	return get_config( 'BASE_URL' ) . $path;
 }
 
+function absolute_url($path = ''){
+	return get_config('BASE_URL') . $path;
+}
+
 function get_config( $name ) {
 	$config = require __DIR__ . '/config.php';
 	$name   = strtoupper( $name );
@@ -151,4 +155,19 @@ function confirmAccount($code){
 		'code' => $code
 	];
 	$statement->execute($params);
+}
+
+/*  */
+function sendConfirmationMail($email, $code){
+
+	$url = url('register.confirm', ['code' => $code]);
+	$absolute_url = absolute_url($url);
+
+	$mailer = getSwiftMailer();
+	$message = createEmailMessage($email, 'Bevestig je account', 'VerificatieMail', 'laudehoop@hotmail.com');
+	$email_text = 'Bevestig nu je account: ' . $absolute_url;
+	$message->setBody($email_text, 'text/html');
+
+	$mailer->send($message);
+
 }

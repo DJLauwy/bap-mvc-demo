@@ -14,7 +14,7 @@
 <body>
 <div class="container">
     <header>
-        <h1>BuurtBoodschappen</h1>
+        <h1>VerificatieMail</h1>
     </header>
     <nav>
 		<?php if ( $this->section( 'navigation' ) ): ?>

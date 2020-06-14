@@ -61,7 +61,10 @@
 					];
 					$statement->execute($params);  
 
-					$bedanktUrl = url('registration.thankyou');
+					//verificattielink sturen naar mail
+					sendConfirmationMail($email ,$code);
+
+					$bedanktUrl = url('register.thankyou');
 					redirect($bedanktUrl);
 					
 
