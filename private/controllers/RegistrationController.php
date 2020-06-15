@@ -87,7 +87,7 @@
 		public function confirmRegistration($code){
 			//code lezen
 			//gebruiker ophalen
-						$user = getUserByCode($code);
+			$user = getUserByCode($code);
 			if ($user === false /*!$user*/ ){
 				echo "onbekende gebruiker of als bevestigd?";
 				exit;

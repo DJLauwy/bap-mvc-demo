@@ -43,7 +43,7 @@ function site_url( $path = '' ) {
 }
 
 function absolute_url($path = ''){
-	return get_config('BASE_URL') . $path;
+	return get_config('BASE_HOST') . $path;
 }
 
 function get_config( $name ) {
